@@ -29,41 +29,32 @@
 </template>
 
 <script setup>
-    import axios from 'axios';
-    import { useToast } from 'vue-toast-notification'
-    import { reactive, onMounted } from 'vue';
+    import getUsers from '@/composables/getUsers'
+    const { data, loadUsers } = getUsers();
+    loadUsers();
 
-    const $toast = useToast();
-    const data = reactive({
-        loading:true,
-        user:[]
-    })
+    // import axios from 'axios';
+    // import { useToast } from 'vue-toast-notification'
+    // import { reactive, onMounted } from 'vue';
 
-    // const loadUsers = () => {
-    //     axios.get(`http://localhost:3004/userssss`)
-    //     .then(response=>{
+    // const $toast = useToast();
+    // const data = reactive({
+    //     loading:true,
+    //     user:[]
+    // })
+
+    // const loadUsers = async() => {
+    //     try{
+    //         const response = await axios.get(`http://localhost:3004/users`);
     //         data.users =  response.data;
     //         data.loading = false;
-    //     })
-    //     .catch(error=>{
+    //     } catch(error){
     //         $toast.error('Sorry, something went wrong')
-    //         data.loading = false;
-    //     })
+    //     }
     // }
 
-    const loadUsers = async() => {
-        try{
-            const response = await axios.get(`http://localhost:3004/users`);
-            data.users =  response.data;
-            data.loading = false;
-        } catch(error){
-            $toast.error('Sorry, something went wrong')
-        }
-    }
-
-    onMounted(()=>{
-        loadUsers();
-    })
-  
+    // onMounted(()=>{
+    //     loadUsers();
+    // })
 
 </script>
