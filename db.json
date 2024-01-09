@@ -34,6 +34,11 @@
       "name": "Brad",
       "lastname": "Pitt",
       "id": 7
+    },
+    {
+      "name": "Kevin",
+      "lastname": "Hart",
+      "id": 8
     }
   ]
 }

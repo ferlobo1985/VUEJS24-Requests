@@ -14,38 +14,49 @@
       <input class="form-control" type="text" v-model="user.lastname" />
     </div>
 
-    <button class="btn btn-primary" @click.prevent="submitForm">Submit</button>
+    <button class="btn btn-primary" @click.prevent="addUser()">Submit</button>
   </div>
 </template>
 
 <script setup>
-import axios from "axios";
-import { useToast } from "vue-toast-notification";
-import { reactive, ref } from "vue";
+  import postUser from '@/composables/postUser'
+  import { reactive } from "vue";
 
-const $toast = useToast();
-const loading = ref(false);
-const user = reactive({
-  name: "",
-  lastname: "",
-});
+  const user = reactive({
+    name: "",
+    lastname: "",
+  });
 
-const submitForm = () => {
-  loading.value = true;
+  const {loading,addUser} = postUser(user)
 
-  axios({
-    method: "POST",
-    url: "http://localhost:3004/users",
-    data: user,
-  })
-    .then(() => {
-      $toast.success("Great dude !!!");
-    })
-    .catch((error) => {
-      $toast.error("Sorry, something went wrong");
-    })
-    .finally(()=>{
-        loading.value = false;
-    })
-};
+
+// import axios from "axios";
+// import { useToast } from "vue-toast-notification";
+// import { reactive, ref } from "vue";
+
+// const $toast = useToast();
+// const loading = ref(false);
+// const user = reactive({
+//   name: "",
+//   lastname: "",
+// });
+
+// const submitForm = () => {
+//   loading.value = true;
+
+//   axios({
+//     method: "POST",
+//     url: "http://localhost:3004/users",
+//     data: user,
+//   })
+//     .then(() => {
+//       $toast.success("Great dude !!!");
+//     })
+//     .catch((error) => {
+//       $toast.error("Sorry, something went wrong");
+//     })
+//     .finally(()=>{
+//         loading.value = false;
+//     })
+// };
 </script>
